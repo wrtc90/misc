@@ -1,0 +1,43 @@
+% !TeX program = lualatex
+\RequirePackage{luatex85}
+\documentclass[border=1pt]{standalone}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+\usepackage[partial=upright]{unicode-math}
+\usepackage{fontspec}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage[main=ngerman,english]{babel}
+
+\begin{document}
+
+\begin{tikzpicture}
+	\begin{axis}[
+		width=7cm,
+		grid=both,
+		view={60}{45},
+		set layers,
+		every axis plot/.append style={on layer=pre main},
+		xlabel={$x$},
+		ylabel={$y$},
+		zlabel={another quantity $z$},
+		grid=both,
+		clip=false,
+	]
+	\addplot3 [
+		mesh,
+		scatter,
+		samples=10,
+		domain=0:1,
+	] {5*x*cos (2*deg(x)) * y*(1-y) + 15};
+	\node at (rel axis cs:0.5,1,1) [above,sloped like x axis] {$x$ explanation};
+	\node at (rel axis cs:0,0.5,1) [above,sloped like y axis] {$y$ explanation};
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}
